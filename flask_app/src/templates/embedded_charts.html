@@ -1,0 +1,25 @@
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+
+<div class="row">
+    <div class="col-md-3">
+        <form action="javascript:update_bc()">
+            <label>Update</label>
+            <input type="submit">
+            <br>
+
+            <label>Part</label>
+            <select id="part">
+                <option value="sepal" {% if part=='sepal' %} selected="selected" {% endif %}>sepal</option>
+                <option value="petal" {% if part=='petal' %} selected="selected" {% endif %}>petal</option>
+            </select>
+            <br>
+
+            <label>Dimension</label>
+            <select id="dimension">
+                <option value="width" {% if part=='width' %} selected="selected" {% endif %}>width</option>
+                <option value="length" {% if part=='length' %} selected="selected" {% endif %}>length</option>
+            </select>
+        </form>
+    </div>
+    <div class="col-md-9" id="bar-chart"></div>
+</div>
