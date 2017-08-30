@@ -1,7 +1,0 @@
-gunicorn
-flask
-numpy
-pandas
-bokeh
-flask
-pathos

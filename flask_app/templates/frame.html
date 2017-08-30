@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+
+
+        <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.css" type="text/css" />
+        <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.6.min.css" rel="stylesheet" type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.js"></script>
+        <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.6.min.js"></script>
+
+        <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    </head>
+
+    <body>
+        <h1>Question bank exploration dashboard</h1>
+        <a href="/simeval">Explore similarities</a> | <a href="/qexplore">Explore questions</a>
+        <p><i>It may take time till the charts are displayed (up to couple of minutes on slow machines) - this is due to heavy use of JavaScript.</i></p>
+
+        {{ content | safe }}
+    </body>
+</html>
+
