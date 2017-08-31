@@ -3,7 +3,7 @@
 settings_file=$1
 source $settings_file
 
-cur_dir=`dirname $BASH_SOURCE`
+cur_dir=`dirname $(readlink -f $BASH_SOURCE)`
 
 cd $cur_dir/../
 cp -r $DIRS_TO_DEPLOY "$DEPLOY_ROOT/"

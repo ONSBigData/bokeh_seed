@@ -10,5 +10,5 @@ function update_chart() {
 }
 
 $(document).ready(function(){
-    update_bc()
+    update_chart()
 });
