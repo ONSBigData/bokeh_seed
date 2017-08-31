@@ -1,8 +1,12 @@
 <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 
+<p>
+    Showing embedded Bokeh chart served by a flask route
+</p>
+
 <div class="row">
     <div class="col-md-3">
-        <form action="javascript:update_bc()">
+        <form action="javascript:update_chart()">
             <label>Update</label>
             <input type="submit">
             <br>
@@ -22,7 +26,7 @@
             <br>
 
             <label>Number of results</label>
-            <input type="number" name="nresults" min="10" max="30">
+            <input type="number" id="nresults" min="10" max="30" value="10">
         </form>
     </div>
     <div class="col-md-9" id="bar-chart"></div>

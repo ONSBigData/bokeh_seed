@@ -1,7 +1,6 @@
 from bokeh.models import Div, Slider, Select, Button
 from bokeh.layouts import layout, widgetbox
 from bokeh.embed import components
-
 from bokeh.server.server import Server
 from bokeh.application.handlers import FunctionHandler
 from bokeh.application import Application
@@ -11,8 +10,6 @@ from common import sample_bokeh_chart
 import sys
 
 # --- constants -----------------------------------------------------------
-
-APP_TITLE = 'Bokeh server app seed'
 
 PAGE_WIDTH = 1300
 WIDGET_BOX_WIDTH = 250
@@ -32,8 +29,6 @@ class BokehServerApp:
         self.chart_div.text = js + ' ' + div
 
     def __init__(self):
-        self.top_div = Div(text='', width=CHARTS_WIDTH)
-
         self.chart_div = Div(text='', width=CHARTS_WIDTH)
 
         self.nresults_ctrl = Slider(title="Number of results", value=10, start=10, end=30, step=1)
@@ -60,10 +55,7 @@ class BokehServerApp:
             sizing_mode=sizing_mode, responsive=True, width=WIDGET_BOX_WIDTH
         )
 
-        main_column = layout([
-            [self.top_div],
-            [self.chart_div]
-        ])
+        main_column = layout([[self.chart_div]])
 
         l = layout([
             [inputs_column, main_column],
@@ -78,7 +70,7 @@ def run_app(show=True):
         app = BokehServerApp()
         l = app.get_layout()
         doc.add_root(l)
-        doc.title = APP_TITLE
+        doc.title = 'Bokeh server seed app'
 
     io_loop = IOLoop.instance()
     bokeh_app = Application(FunctionHandler(modify_doc))
