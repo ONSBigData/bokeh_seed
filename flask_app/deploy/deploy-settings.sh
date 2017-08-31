@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cur_dir=`dirname $0`
+cur_dir=`dirname $BASH_SOURCE`
 
 APP_TITLE='flask-app-seed'
 DIRS_TO_DEPLOY="flask_app common"
