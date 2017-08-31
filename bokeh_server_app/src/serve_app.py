@@ -3,7 +3,7 @@ import sys
 sys.path.append(os.path.realpath(os.path.dirname(__file__)))
 
 from bokeh.io import curdoc
-from app import BokehServerApp
+from bokeh_server_app.src.app import BokehServerApp
 
 app = BokehServerApp()
 

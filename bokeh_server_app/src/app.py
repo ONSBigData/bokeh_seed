@@ -1,6 +1,5 @@
-from bokeh.models import Div, Slider, Select, Button, ColumnDataSource, HoverTool
+from bokeh.models import Div, Slider, Select, Button
 from bokeh.layouts import layout, widgetbox
-from bokeh.plotting import figure
 from bokeh.embed import components
 
 from bokeh.server.server import Server
@@ -8,12 +7,12 @@ from bokeh.application.handlers import FunctionHandler
 from bokeh.application import Application
 from tornado.ioloop import IOLoop
 
-import pandas as pd
+from common import sample_bokeh_chart
 import sys
 
 # --- constants -----------------------------------------------------------
 
-APP_TITLE = 'Bokeh server seed app'
+APP_TITLE = 'Bokeh server app seed'
 
 PAGE_WIDTH = 1300
 WIDGET_BOX_WIDTH = 250
@@ -27,46 +26,12 @@ class BokehServerApp:
         dimension = self.dimension_ctrl.value
         part = self.part_ctrl.value
 
-        field = '{}_{}'.format(part, dimension)
-
-        df = self.base_df.copy()
-        IDX = '__index__'
-        df = df.sort_values(by=field, ascending=False)
-        df = df.iloc[:nresults]
-        df[IDX] = range(1, len(df) + 1)
-        df['color'] = df['species'].apply(lambda x: {
-            'setosa': 'blue',
-            'versicolor': 'red',
-            'virginica': 'green'
-        }[x])
-
-        src = ColumnDataSource(df)
-
-        bc = figure(
-            plot_width=CHARTS_WIDTH,
-            title='{} {}'.format(part, dimension),
-            tools=[HoverTool(tooltips=[(c, '@{}'.format(c)) for c in df.columns])]
-        )
-
-        bc.vbar(
-            top=field,
-            bottom=0,
-            x=IDX,
-            width=0.5,
-            color='color',
-            source=src
-        )
-
-        bc.xaxis[0].ticker.desired_num_ticks = len(df)
-        bc.yaxis.axis_label = '{} {}'.format(part, dimension)
-        bc.xaxis.axis_label = 'index'
+        bc = sample_bokeh_chart.get_bar_chart(part, dimension, nresults)
 
         js, div = components(bc)
         self.chart_div.text = js + ' ' + div
 
     def __init__(self):
-        self.base_df = pd.read_csv('./bundled_data/iris.csv')
-
         self.top_div = Div(text='', width=CHARTS_WIDTH)
 
         self.chart_div = Div(text='', width=CHARTS_WIDTH)

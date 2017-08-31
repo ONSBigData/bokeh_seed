@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request
 
 from bokeh.embed import autoload_server, components
-from bokeh.models import ColumnDataSource, HoverTool
-from bokeh.plotting import figure
-import pandas as pd
+from common import sample_bokeh_chart
 
 flask_app = Flask(__name__)
 
@@ -22,44 +20,6 @@ def get_code(obj):
     return js + ' ' + div
 
 
-def get_bar_chart(part, dimension):
-    field = '{}_{}'.format(part, dimension)
-    df = pd.read_csv('bundled_data/iris.csv')
-
-    IDX = '__index__'
-    df = df.sort_values(by=field, ascending=False)
-    df = df.iloc[:15]
-    df[IDX] = range(1, len(df) + 1)
-    df['color'] = df['species'].apply(lambda x: {
-        'setosa': 'blue',
-        'versicolor': 'red',
-        'virginica': 'green'
-    }[x])
-
-    src = ColumnDataSource(df)
-
-    bc = figure(
-        plot_width=1000,
-        title='{} {}'.format(part, dimension),
-        tools=[HoverTool(tooltips=[(c, '@{}'.format(c)) for c in df.columns])]
-    )
-
-    bc.vbar(
-        top=field,
-        bottom=0,
-        x=IDX,
-        width=0.5,
-        color='color',
-        source=src
-    )
-
-    bc.xaxis[0].ticker.desired_num_ticks = len(df)
-    bc.yaxis.axis_label = '{} {}'.format(part, dimension)
-    bc.xaxis.axis_label = 'index'
-
-    return bc
-
-
 # --- flask routes -----------------------------------------------------------
 
 
@@ -67,7 +27,7 @@ def get_bar_chart(part, dimension):
 def get_component():
     payload = request.args.to_dict()
 
-    comp = get_bar_chart(payload['part'], payload['dimension'])
+    comp = sample_bokeh_chart.get_bar_chart(payload['part'], payload['dimension'], payload['nresults'])
 
     return get_code(comp)
 

@@ -1,1 +1,1 @@
-web: gunicorn --log-file - server:flask_app --timeout 180
+web: gunicorn --log-file - flask_app.src.server:flask_app --timeout 180

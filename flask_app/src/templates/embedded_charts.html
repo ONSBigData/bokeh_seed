@@ -19,6 +19,10 @@
                 <option value="width" {% if part=='width' %} selected="selected" {% endif %}>width</option>
                 <option value="length" {% if part=='length' %} selected="selected" {% endif %}>length</option>
             </select>
+            <br>
+
+            <label>Number of results</label>
+            <input type="number" name="nresults" min="10" max="30">
         </form>
     </div>
     <div class="col-md-9" id="bar-chart"></div>

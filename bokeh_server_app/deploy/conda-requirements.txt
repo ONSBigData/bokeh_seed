@@ -1,2 +1,7 @@
+# some dependencies (e.g. numpy) cannot be installed on Heroku and need to be installed via conda-requirements
+# however, if many packages are installed this way, it may take up considerable space - and may go over Heroku's memory
+# limit when deploying
 numpy
+
+# use nomlk to prevent installing too many things
 nomkl

@@ -1,11 +1,13 @@
 #!/bin/bash
 
-cur_dir=`dirname $0`
-source "$cur_dir/deploy-common.sh"
+settings_file=$1
+source $settings_file
 
-# copy in some data to bundle with the app -----------------------------------
-cp -r $cur_dir/../src/* "$DEPLOY_ROOT/"
-cp "$cur_dir/Procfile" "$DEPLOY_ROOT/Procfile"
+cur_dir=`dirname $0`
+
+cd $cur_dir/../
+cp -r $DIRS_TO_DEPLOY "$DEPLOY_ROOT/"
+cp $DEPLOY_FILES_LOCATION/* "$DEPLOY_ROOT/"
 
 # deploy to Heroku -----------------------------------
 cd $DEPLOY_ROOT

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-cur_dir=`dirname $0`
-source "$cur_dir/deploy-common.sh"
+settings_file=$1
+source $settings_file
 
 rm -rf $DEPLOY_ROOT
 mkdir $DEPLOY_ROOT
